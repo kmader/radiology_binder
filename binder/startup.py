@@ -5,7 +5,7 @@ import pydicom
 import numpy as np
 
 from IPython.display import display, HTML
-
+BASE_DIR = 'dicoms'
 def find_files(path=None):
   if (path is None) or not isinstance(path, str): 
     raise ValueError('Please enter a path to search, a good start is *.*')
