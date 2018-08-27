@@ -26,6 +26,7 @@ script:
         exit 1;
     fi;
     done
+  - py.test
   - py.test --cov=easyrad
   - EASYRAD_DIR=dicoms python tests/test_doctests.py
   - codecov
