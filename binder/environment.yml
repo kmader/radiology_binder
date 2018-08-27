@@ -1,0 +1,20 @@
+name: radiology_binder
+channels:
+  - conda-forge
+  - defaults
+  - simpleitk
+dependencies:
+  - numpy
+  - scipy
+  - matplotlib
+  - pandas
+  - ipympl
+  - scikit-image<=0.20
+  - scikit-learn<=0.20
+  - SimpleITK
+  - pip:
+    - plotly
+    - pydicom>=1.0
+    - seaborn==0.7.1
+    - fileupload
+    - pyradiomics==2.0.0
