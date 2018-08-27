@@ -1,7 +1,7 @@
 import doctest
 import sys
 
-from easyrad import io
+from easyrad import browsing
 
 def test_io():
-    doctest.testmod(io)
+    doctest.testmod(browsing)

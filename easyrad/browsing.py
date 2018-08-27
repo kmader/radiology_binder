@@ -9,6 +9,12 @@ import pydicom
 from IPython.display import display
 from skimage.io import imread
 
+BASE_DIR = os.environ.get('EASYRAD_DIR', '.')
+
+_dicom_as_np = lambda x: pydicom.read_file(x).pixel_array
+_img_as_np = lambda x: imread(x)
+_rel_glob = lambda x: sorted(glob(os.path.join(BASE_DIR, x)))
+
 
 def show_workspace(in_vars=None, show_df=False):
     """
@@ -22,8 +28,9 @@ def show_workspace(in_vars=None, show_df=False):
     0
     >>> bob=5
     >>> var_df = show_workspace()
-    >>> list(var_df[var_df['variable name']=='bob'].T.to_dict().values())[0]
-    {'variable name': 'bob', 'type': <class 'int'>, 'preview': '5', 'shape': ''}
+    >>> print(var_df[var_df['variable name']=='bob'].to_string(index=False))
+    variable name           type shape preview
+             bob  <class 'int'>             5
     """
     if in_vars is None:
         frame = inspect.currentframe()
@@ -48,13 +55,6 @@ def show_workspace(in_vars=None, show_df=False):
         return clean_var_list
 
 
-BASE_DIR = os.environ.get('EASYRAD_DIR', '.')
-
-_dicom_as_np = lambda x: pydicom.read_file(x).pixel_array
-_img_as_np = lambda x: imread(x)
-_rel_glob = lambda x: glob(os.path.join(BASE_DIR, x))
-
-
 def file_type(in_path):
     _, ext = os.path.splitext(in_path.lower())
     if ext == '.dcm':
@@ -68,8 +68,6 @@ def file_type(in_path):
 def find_files(path=None):
     """
     Show the currently available data files
-    >>> BASE_DIR
-    >>> _rel_glob('*')
     >>> find_files('').shape
     (2, 4)
     >>> find_files('dcm')['name'].values.tolist()
