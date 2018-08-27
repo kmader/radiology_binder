@@ -7,7 +7,7 @@ import pandas as pd
 import pydicom
 from IPython.display import display
 from skimage.io import imread
-
+from . import utils
 from .utils import BASE_DIR, _rel_glob
 
 _dicom_as_np = lambda x: pydicom.read_file(x).pixel_array

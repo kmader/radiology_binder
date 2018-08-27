@@ -9,11 +9,12 @@ cache:
 
 env:
   matrix:
-    - DISTRIB="conda" PYTHON_VERSION="3.6" COVERAGE="false" EASYRAD_DIR=dicoms
+    - DISTRIB="conda" PYTHON_VERSION="3.6" EASYRAD_DIR=dicoms
 
-install: 
+install:
   - source build_tools/travis_install.sh
   - ipython kernel install --user --name testkernel
+  - pip install pytest-cov codecov
 
 script:
   - mypy -m easyrad --ignore-missing-imports
@@ -25,5 +26,6 @@ script:
         exit 1;
     fi;
     done
-  - py.test
+  - py.test --cov=easyrad
   - EASYRAD_DIR=dicoms python tests/test_doctests.py
+  - codecov

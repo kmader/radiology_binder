@@ -4,9 +4,6 @@ import types
 
 from easyrad import browsing
 
-def test_io():
-    doctest.testmod(browsing)
-
 if __name__=="__main__":
     import easyrad
     doctest.testmod(easyrad, verbose=True, report=True)
