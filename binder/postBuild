@@ -1,0 +1,4 @@
+mkdir .ipython
+mkdir .ipython/profile_default
+mkdir .ipython/profile_default/startup
+copy startup.py .ipython/profile_default/startup/
