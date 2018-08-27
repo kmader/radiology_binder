@@ -21,3 +21,5 @@ script:
         exit 1;
     fi;
     done
+  - py.test --doctest-modules
+  
