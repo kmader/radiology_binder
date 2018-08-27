@@ -9,11 +9,12 @@ cache:
 
 env:
   matrix:
-    - DISTRIB="conda" PYTHON_VERSION="3.6" COVERAGE="false"
+    - DISTRIB="conda" PYTHON_VERSION="3.6" COVERAGE="false" EASYRAD_DIR=dicoms
 
 install: source build_tools/travis_install.sh
 
 script:
+  - mypy -m easyrad --ignore-missing-imports
   - for nb in *ipynb; do
     jupyter nbconvert --ExecutePreprocessor.timeout=3600 --execute "$nb" --to markdown |& tee nb_to_md.txt;
     traceback=$(grep "Traceback (most recent call last):" nb_to_md.txt);
@@ -21,5 +22,5 @@ script:
         exit 1;
     fi;
     done
-  - EASYRAD_DIR=dicoms py.test
+  - py.test
   

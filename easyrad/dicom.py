@@ -1,10 +1,16 @@
 """
 Commands for making opening one or more dicoms very easy
 """
+
+import os
 from collections import namedtuple
-import pydicom
+from typing import Any
+
+import numpy as np
 import pandas as pd
-from .browsing import _rel_glob
+import pydicom
+
+from .utils import _rel_glob, BASE_DIR
 
 type_info = namedtuple('type_info',
                        ['inferrable', 'realtype', 'has_nulltype', 'length',
@@ -116,6 +122,7 @@ def _tlen(x):
             pass
         return 1
 
+
 def load_dicom(in_path, load_images=True):
     """
     A function to load a dicom, list of dicoms, or data frame of dicoms
@@ -132,7 +139,8 @@ def load_dicom(in_path, load_images=True):
             files_to_load = [os.path.join(BASE_DIR, x) for x in in_path['name']]
         else:
             raise ValueError(
-                'load_dicom expects a dataframe like the one created by find_files (it should have a column called name)')
+                'load_dicom expects a dataframe like the one created \
+                by find_files (it should have a column called name)')
     else:
         if isinstance(in_path, str):
             files_to_load = _rel_glob(in_path)
@@ -142,4 +150,6 @@ def load_dicom(in_path, load_images=True):
 
     out_df = _dicom_paths_to_df(files_to_load)
     if load_images:
-        out_df['image'] = out_df['image']
+        out_df['image'] = out_df['file path'].map(
+            lambda x: pydicom.read_file(x).pixel_array)
+    return out_df

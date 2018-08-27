@@ -18,3 +18,4 @@ dependencies:
     - seaborn==0.7.1
     - fileupload
     - pyradiomics==2.0.0
+    - mypy

@@ -1,7 +1,6 @@
 """Basic tools for browsing files, reading images and loading dicom data without too much understanding for python"""
 import inspect
 import os
-from glob import glob
 
 import numpy as np
 import pandas as pd
@@ -9,11 +8,10 @@ import pydicom
 from IPython.display import display
 from skimage.io import imread
 
-BASE_DIR = os.environ.get('EASYRAD_DIR', '.')
+from .utils import BASE_DIR, _rel_glob
 
 _dicom_as_np = lambda x: pydicom.read_file(x).pixel_array
 _img_as_np = lambda x: imread(x)
-_rel_glob = lambda x: sorted(glob(os.path.join(BASE_DIR, x)))
 
 
 def show_workspace(in_vars=None, show_df=False):
