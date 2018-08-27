@@ -1,7 +1,7 @@
 mkdir .ipython
 mkdir .ipython/profile_default
 mkdir .ipython/profile_default/startup
-cp startup.py .ipython/profile_default/startup/
+cp binder/startup.py .ipython/profile_default/startup/
 
 # set notebook data_rate
 mkdir $HOME/.jupyter
