@@ -126,10 +126,12 @@ def _tlen(x):
 def load_dicom(in_path, load_images=True):
     """
     A function to load a dicom, list of dicoms, or data frame of dicoms
+    >>> load_dicom('').shape[0]
+    2
     >>> load_dicom('test_ct.dcm').shape
     (1, 189)
     >>> load_dicom('*dcm').shape
-    (2, 71)
+    (2, 72)
     """
 
     if isinstance(in_path, pd.DataFrame):
@@ -143,6 +145,8 @@ def load_dicom(in_path, load_images=True):
                 by find_files (it should have a column called name)')
     else:
         if isinstance(in_path, str):
+            if len(in_path) == 0:
+                in_path = '*'
             files_to_load = _rel_glob(in_path)
         if isinstance(in_path, list):
             files_to_load = [_rel_glob(x) for x in in_path]
