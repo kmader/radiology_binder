@@ -127,7 +127,7 @@ def load_dicom(in_path, load_images=True):
     """
     A function to load a dicom, list of dicoms, or data frame of dicoms
     >>> load_dicom('test_ct.dcm').shape
-    (1, 188)
+    (1, 189)
     >>> load_dicom('*dcm').shape
     (2, 71)
     """
