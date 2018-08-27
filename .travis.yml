@@ -19,8 +19,6 @@ install:
 script:
   - mypy -m easyrad --ignore-missing-imports
   - shopt -s globstar
-  - ls -lh .ipython/profile_default/startup/*
-  - cp binder/startup.pytxt .ipython/profile_default/startup/startup.py
   - for nb in **/*ipynb; do
     jupyter nbconvert --ExecutePreprocessor.timeout=3600 --ExecutePreprocessor.kernel_name=testkernel --execute "$nb" --to markdown |& tee nb_to_md.txt;
     traceback=$(grep "Traceback (most recent call last):" nb_to_md.txt);
