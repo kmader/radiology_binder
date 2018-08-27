@@ -2,6 +2,8 @@ from glob import glob
 import pandas as pd
 import matplotlib.pyplot as plt
 import pydicom
+import numpy as np
+
 from IPython.display import display, HTML
 
 def find_files(path=None):
